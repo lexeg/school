@@ -21,10 +21,29 @@ class m160924_050242_create_users_table extends Migration
             'first_name' => $this->string(100)->notNull(),
             'middle_name' => $this->string(100)->notNull(),
             'last_name' => $this->string(100)->notNull(),
-            'email_name' => $this->string(50)->notNull(),
-            'login_name' => $this->string(50)->notNull(),
-            'password_name' => $this->string(50)->notNull(),
+            'email' => $this->string(50)->notNull(),
+            'login' => $this->string(50)->notNull(),
+            'password' => $this->string(50)->notNull(),
+            'role_id' => $this->integer()->notNull(),
+            'photo' => 'BLOB NOT NULL'
         ], $tableOptions);
+
+        // creates index for column `role_id`
+        $this->createIndex(
+            'idx-users-role_id',
+            'users',
+            'role_id'
+        );
+
+        // add foreign key for table `roles`
+        $this->addForeignKey(
+            'fk-users-role_id',
+            'users',
+            'role_id',
+            'roles',
+            'id',
+            'CASCADE'
+        );
     }
 
     /**
@@ -32,6 +51,18 @@ class m160924_050242_create_users_table extends Migration
      */
     public function down()
     {
+        // drops foreign key for table `roles`
+        $this->dropForeignKey(
+            'fk-users-role_id',
+            'users'
+        );
+
+        // drops index for column `role_id`
+        $this->dropIndex(
+            'idx-users-role_id',
+            'users'
+        );
+
         $this->dropTable('{{%users}}');
     }
 }

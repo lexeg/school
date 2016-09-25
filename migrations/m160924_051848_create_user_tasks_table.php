@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `usertasks`.
+ * Handles the creation for table `user_tasks`.
  */
-class m160924_051848_create_usertasks_table extends Migration
+class m160924_051848_create_user_tasks_table extends Migration
 {
     /**
      * @inheritdoc
@@ -16,7 +16,7 @@ class m160924_051848_create_usertasks_table extends Migration
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT \'Таблица связи пользователей с тасками\'';
         }
-        $this->createTable('usertasks', [
+        $this->createTable('{{%user_tasks}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
             'task_id' => $this->integer()->notNull()
@@ -24,15 +24,15 @@ class m160924_051848_create_usertasks_table extends Migration
 
         // creates index for column `user_id`
         $this->createIndex(
-            'idx-usertasks-user_id',
-            'usertasks',
+            'idx-user_tasks-user_id',
+            'user_tasks',
             'user_id'
         );
 
         // add foreign key for table `users`
         $this->addForeignKey(
-            'fk-usertasks-user_id',
-            'usertasks',
+            'fk-user_tasks-user_id',
+            'user_tasks',
             'user_id',
             'users',
             'id',
@@ -41,15 +41,15 @@ class m160924_051848_create_usertasks_table extends Migration
 
         // creates index for column `task_id`
         $this->createIndex(
-            'idx-usertasks-task_id',
-            'usertasks',
+            'idx-user_tasks-task_id',
+            'user_tasks',
             'task_id'
         );
 
         // add foreign key for table `tasks`
         $this->addForeignKey(
-            'fk-usertasks-task_id',
-            'usertasks',
+            'fk-user_tasks-task_id',
+            'user_tasks',
             'task_id',
             'tasks',
             'id',
@@ -64,29 +64,29 @@ class m160924_051848_create_usertasks_table extends Migration
     {
         // drops foreign key for table `users`
         $this->dropForeignKey(
-            'fk-usertasks-user_id',
-            'usertasks'
+            'fk-user_tasks-user_id',
+            'user_tasks'
         );
 
         // drops index for column `user_id`
         $this->dropIndex(
-            'idx-usertasks-user_id',
-            'usertasks'
+            'idx-user_tasks-user_id',
+            'user_tasks'
         );
 
 
         // drops foreign key for table `users`
         $this->dropForeignKey(
-            'fk-usertasks-task_id',
-            'usertasks'
+            'fk-user_tasks-task_id',
+            'user_tasks'
         );
 
         // drops index for column `task_id`
         $this->dropIndex(
-            'idx-usertasks-task_id',
-            'usertasks'
+            'idx-user_tasks-task_id',
+            'user_tasks'
         );
 
-        $this->dropTable('usertasks');
+        $this->dropTable('{{%user_tasks}}');
     }
 }

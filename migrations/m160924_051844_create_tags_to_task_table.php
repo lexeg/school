@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `tagstotask`.
+ * Handles the creation for table `tags_to_task`.
  */
-class m160924_051844_create_tagstotask_table extends Migration
+class m160924_051844_create_tags_to_task_table extends Migration
 {
     /**
      * @inheritdoc
@@ -16,7 +16,7 @@ class m160924_051844_create_tagstotask_table extends Migration
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT \'Таблица связи тэгов с тасками\'';
         }
-        $this->createTable('tagstotask', [
+        $this->createTable('{{%tags_to_task}}', [
             'id' => $this->primaryKey(),
             'task_id' => $this->integer()->notNull(),
             'tag_id' => $this->integer()->notNull()
@@ -24,15 +24,15 @@ class m160924_051844_create_tagstotask_table extends Migration
 
         // creates index for column `task_id`
         $this->createIndex(
-            'idx-tagstotask-task_id',
-            'tagstotask',
+            'idx-tags_to_task-task_id',
+            'tags_to_task',
             'task_id'
         );
 
         // add foreign key for table `tasks`
         $this->addForeignKey(
-            'fk-tagstotask-task_id',
-            'tagstotask',
+            'fk-tags_to_task-task_id',
+            'tags_to_task',
             'task_id',
             'tasks',
             'id',
@@ -42,15 +42,15 @@ class m160924_051844_create_tagstotask_table extends Migration
 
         // creates index for column `tag_id`
         $this->createIndex(
-            'idx-tagstotask-tag_id',
-            'tagstotask',
+            'idx-tags_to_task-tag_id',
+            'tags_to_task',
             'tag_id'
         );
 
         // add foreign key for table `tags`
         $this->addForeignKey(
-            'fk-tagstotask-tag_id',
-            'tagstotask',
+            'fk-tags_to_task-tag_id',
+            'tags_to_task',
             'tag_id',
             'tags',
             'id',
@@ -65,29 +65,29 @@ class m160924_051844_create_tagstotask_table extends Migration
     {
         // drops foreign key for table `tasks`
         $this->dropForeignKey(
-            'fk-tagstotask-task_id',
-            'tagstotask'
+            'fk-tags_to_task-task_id',
+            'tags_to_task'
         );
 
         // drops index for column `task_id`
         $this->dropIndex(
-            'idx-tagstotask-task_id',
-            'tagstotask'
+            'idx-tags_to_task-task_id',
+            'tags_to_task'
         );
 
 
         // drops foreign key for table `tags`
         $this->dropForeignKey(
-            'fk-tagstotask-tag_id',
-            'tagstotask'
+            'fk-tags_to_task-tag_id',
+            'tags_to_task'
         );
 
         // drops index for column `tag_id`
         $this->dropIndex(
-            'idx-tagstotask-tag_id',
-            'tagstotask'
+            'idx-tags_to_task-tag_id',
+            'tags_to_task'
         );
 
-        $this->dropTable('tagstotask');
+        $this->dropTable('{{%tags_to_task}}');
     }
 }
