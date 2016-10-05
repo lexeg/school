@@ -5,7 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Groups;
 use app\modules\admin\models\GroupsSearch;
-use yii\web\Controller;
+use app\modules\admin\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -19,7 +19,8 @@ class GroupsController extends Controller
      */
     public function behaviors()
     {
-        return [
+        $parent = parent::behaviors();
+        $return = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -27,6 +28,7 @@ class GroupsController extends Controller
                 ],
             ],
         ];
+        return array_merge($parent, $return);
     }
 
     /**

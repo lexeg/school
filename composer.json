@@ -18,7 +18,8 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "monolog/monolog": "^1.21"
+        "monolog/monolog": "^1.21",
+        "yiisoft/yii2-jui": "~2.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

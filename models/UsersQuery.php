@@ -31,4 +31,9 @@ class UsersQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    public function byLogin($login)
+    {
+        return $this->andWhere(['login' => $login]);
+    }
 }

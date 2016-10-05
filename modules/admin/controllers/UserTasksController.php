@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Roles;
-use app\modules\admin\models\RolesSearch;
+use app\models\UserTasks;
+use app\modules\admin\models\UserTasksSearch;
 use app\modules\admin\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RolesController implements the CRUD actions for Roles model.
+ * UserTasksController implements the CRUD actions for UserTasks model.
  */
-class RolesController extends Controller
+class UserTasksController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +32,12 @@ class RolesController extends Controller
     }
 
     /**
-     * Lists all Roles models.
+     * Lists all UserTasks models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new RolesSearch();
+        $searchModel = new UserTasksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +47,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Displays a single Roles model.
+     * Displays a single UserTasks model.
      * @param integer $id
      * @return mixed
      */
@@ -59,13 +59,13 @@ class RolesController extends Controller
     }
 
     /**
-     * Creates a new Roles model.
+     * Creates a new UserTasks model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Roles();
+        $model = new UserTasks();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,7 +77,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Updates an existing Roles model.
+     * Updates an existing UserTasks model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Deletes an existing Roles model.
+     * Deletes an existing UserTasks model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -109,15 +109,15 @@ class RolesController extends Controller
     }
 
     /**
-     * Finds the Roles model based on its primary key value.
+     * Finds the UserTasks model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Roles the loaded model
+     * @return UserTasks the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Roles::findOne($id)) !== null) {
+        if (($model = UserTasks::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
