@@ -6,6 +6,8 @@
  * Time: 10:31
  */
 use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\helpers\Html;
 ?>
 
 <div>
@@ -15,6 +17,11 @@ use yii\grid\GridView;
             'id',
             'user.first_name',
             'task.task_name',
+            ['class' => 'yii\grid\ActionColumn']
         ],
     ]); ?>
+    <?= Html::a('Назад', Url::to(['site/index'])) ?>
+    <p>
+        <?= Html::a('Создать задачу', Url::to(['user-tasks/create'])) ?>
+    </p>
 </div>
