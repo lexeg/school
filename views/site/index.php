@@ -1,20 +1,43 @@
 <?php
 
+use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
+    <p>Пользователь:</p>
+    <?php echo $user->first_name ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            'id',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'email:email',
+            // 'login',
+            // 'password',
+            // 'role_id',
+            // 'photo',
+        ],
+    ]); ?>
+
+    <?= Html::a('Посмотреть мои таски', Url::to(['user-tasks/index', 'userId' => $user->id])) ?>
+    <!--<div class="jumbotron">
         <h1>Congratulations!</h1>
 
+        <p><?php echo $user->first_name ?></p>
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+    </div>-->
 
-    <div class="body-content">
+    <!--<div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
@@ -49,5 +72,5 @@ $this->title = 'My Yii Application';
             </div>
         </div>
 
-    </div>
+    </div>-->
 </div>

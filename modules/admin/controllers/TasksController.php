@@ -66,7 +66,9 @@ class TasksController extends Controller
     public function actionCreate()
     {
         $model = new Tasks();
-
+        //$var = Yii::$app->request->post();
+        //var_dump($var);
+        //die();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

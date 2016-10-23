@@ -1,5 +1,6 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
@@ -15,24 +16,28 @@ use app\models\TaskPriorities;
 
 <div class="tasks-form">
 
+    <? $groups = ArrayHelper::map(Groups::find()->all(), 'id', 'group_name');
+       $task_states = ArrayHelper::map(TaskStates::find()->all(), 'id', 'state_name');
+       $task_priorities = ArrayHelper::map(TaskPriorities::find()->all(), 'id', 'priority_name'); ?>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'task_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'date_start')->widget(DatePicker::className()) ?>
+    <?= $form->field($model, 'date_start')->widget(DatePicker::className(),['dateFormat' => 'dd-MM-yyyy',]) ?>
 
-    <?= $form->field($model, 'date_end')->widget(DatePicker::className(), array('dateFormat' => 'yyyy-MM-dd', 'language' => 'ru',
-        'options' => 'class=\"form-control\"')) ?>
+    <?= $form->field($model, 'date_end')->widget(DatePicker::className(),['dateFormat' => 'dd-MM-yyyy']) ?>
 
-    <!--<? /*$form->field($model, 'group_id')->textInput() */?>-->
-    <? $groups = ArrayHelper::map(Groups::find()->all(), 'id', 'group_name'); ?>
+    <!--<?/*= $form->field($model, 'group_id')->textInput() */?>-->
     <?php echo $form->field($model, 'group_id')->dropDownList($groups); ?>
 
-    <?= $form->field($model, 'state_id')->textInput() ?>
+    <!--<?/*= $form->field($model, 'state_id')->textInput() */?>-->
+    <?php echo $form->field($model, 'state_id')->dropDownList($task_states); ?>
 
-    <?= $form->field($model, 'priority_id')->textInput() ?>
+    <!--<?/*= $form->field($model, 'priority_id')->textInput() */?>-->
+    <?php echo $form->field($model, 'priority_id')->dropDownList($task_priorities); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

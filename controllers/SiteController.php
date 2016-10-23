@@ -3,12 +3,13 @@
 namespace app\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Groups;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -20,10 +21,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'index'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -61,8 +62,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = Groups::find()->all();
-        return $this->render('index');
+        $user = Users::findOne(Yii::$app->user->id);
+        $query = Users::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere(
+            [
+                'id' => $user->id
+            ]
+        );
+
+        return $this->render('index', ['user' => $user, 'dataProvider' => $dataProvider]);
     }
 
     /**

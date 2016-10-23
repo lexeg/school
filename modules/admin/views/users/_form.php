@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Roles;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
@@ -9,6 +11,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="users-form">
+
+    <? $roles = ArrayHelper::map(Roles::find()->all(), 'id', 'role_name'); ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -24,7 +28,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'role_id')->textInput() ?>
+    <!--<?/*= $form->field($model, 'role_id')->textInput() */?>-->
+    <?php echo $form->field($model, 'role_id')->dropDownList($roles); ?>
 
     <?= $form->field($model, 'photo')->textInput() ?>
 

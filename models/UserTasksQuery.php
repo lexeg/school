@@ -31,4 +31,9 @@ class UserTasksQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    public function byUser($userId)
+    {
+        return $this->andFilterWhere(['user_id' => $userId]);
+    }
 }
